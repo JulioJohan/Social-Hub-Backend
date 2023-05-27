@@ -35,6 +35,12 @@ public class User {
 	@Column(name = "confirmed",nullable =  false)
 	private Boolean confirmed;
 	
+	@Column(name = "email_verified",nullable = false)
+	private String emailVerified;
+	
+	@Column(name = "multi_factor_authentication",nullable = false)
+	private String multiFactorAuthentication;
+	
 	@Column(name = "father_last_name", nullable = true)
 	private String fatherLastName;
 	
@@ -50,5 +56,12 @@ public class User {
 	//Se pone como string porque se estaria consumiendo en AWS
 	@Column(name = "avatar",nullable = true)
 	private String avatar;
+	
+	
+	//Poniendo el contructor solo para que cree la cuenta se establesca 
+	// lo pone como false
+	public User() {
+		this.confirmed = false;
+	}
 	
 }
