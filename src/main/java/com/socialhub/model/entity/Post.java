@@ -2,6 +2,7 @@ package com.socialhub.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,8 +27,8 @@ public class Post {
 	@Column(name = "description",nullable = false)
 	private String description;
 
-	@Column(name = "like",nullable = false)
-	private Integer like;
+	@Column(name = "num_like",nullable = false)
+	private Integer numLike;
 	
 	//Se pone como string porque se estaria consumiendo en AWS
 	@Column(name = "multimeda",nullable = true)
@@ -36,7 +37,7 @@ public class Post {
 	@Column(name = "share",nullable = false)
 	private String share;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_user",nullable = false)
 	private User user;
 	

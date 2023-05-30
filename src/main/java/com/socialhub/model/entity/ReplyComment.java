@@ -29,6 +29,9 @@ public class ReplyComment {
 	@Column(name = "multimedia",nullable = true)
 	private String multimedia;
 	
+	@Column(name = "num_like",nullable = false)
+	private Integer numLike;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_user",nullable = false)
 	private User user;

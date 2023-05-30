@@ -2,6 +2,7 @@ package com.socialhub.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +27,9 @@ public class Comment {
 	@Column(name = "descripcion",nullable = false)
 	private String descripcion;
 	
+	@Column(name = "num_like",nullable = false)
+	private Integer numLike;
+	
 	@Column(name = "multimedia",nullable = true)
 	private String multimedia;
 	
@@ -33,7 +37,7 @@ public class Comment {
 	@JoinColumn(name = "id_user",nullable = false)
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_post",nullable = false)
 	private Post post;
 	
