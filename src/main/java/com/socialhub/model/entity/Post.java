@@ -31,7 +31,7 @@ public class Post {
 	
 	//Se pone como string porque se estaria consumiendo en AWS
 	@Column(name = "multimeda",nullable = true)
-	private String multmedia;
+	private String multimedia;
 	
 	@Column(name = "share",nullable = false)
 	private String share;
