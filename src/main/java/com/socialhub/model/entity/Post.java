@@ -1,5 +1,7 @@
 package com.socialhub.model.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +19,12 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "post")
-public class Post {
+public class Post implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
