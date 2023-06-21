@@ -2,6 +2,9 @@ package com.socialhub.model.dto;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Transient;
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,4 +28,10 @@ public class PostDTO implements Serializable{
 	private String share;
 	
 	private Integer user;
+	
+	@Transient
+	private transient MultipartFile multipartFile;
+	
+    // Getters y Setters generados automáticamente por Lombok
+
 }
