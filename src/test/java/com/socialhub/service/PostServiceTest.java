@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -87,7 +88,7 @@ public class PostServiceTest {
 	}
 	
 	@Test
-	void createPostTest() {
+	void createPostTest() throws IOException {
 		PostDTO post = new PostDTO();
 		post.setUser(1);
 		when(iUserRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new User()));
@@ -96,7 +97,7 @@ public class PostServiceTest {
 	}
 	
 	@Test
-	void createPost2Test() {
+	void createPost2Test() throws IOException {
 		PostDTO post = new PostDTO();
 		post.setUser(1);
 //		when(iUserRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new User()));
@@ -105,7 +106,7 @@ public class PostServiceTest {
 	}
 	
 	@Test
-	void createPost3Test() {
+	void createPost3Test() throws IOException {
 		PostDTO post = new PostDTO();
 		post.setUser(1);
 		when(iUserRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new User()));
@@ -115,7 +116,7 @@ public class PostServiceTest {
 	}
 	
 	@Test
-	void updatePostTest() {
+	void updatePostTest() throws IOException {
 		PostDTO post = new PostDTO();
 		post.setUser(1);
 		Response<Post> response= postService.updatePost(post);
@@ -123,7 +124,7 @@ public class PostServiceTest {
 	}
 	
 	@Test
-	void updatePost2Test() {
+	void updatePost2Test() throws IOException {
 		PostDTO post = new PostDTO();
 		post.setIdPost(1);
 		when(iPostRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new Post()));
@@ -132,7 +133,7 @@ public class PostServiceTest {
 	}
 	
 	@Test
-	void updatePost3Test() {
+	void updatePost3Test() throws IOException {
 		PostDTO post = new PostDTO();
 		post.setIdPost(1);
 		when(iPostRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new Post()));

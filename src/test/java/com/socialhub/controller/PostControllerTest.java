@@ -2,6 +2,8 @@ package com.socialhub.controller;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,7 +44,7 @@ public class PostControllerTest {
 		assertNotNull("1");
 	}
 	@Test
-	void createPost() {
+	void createPost() throws IOException {
 		PostDTO post= new PostDTO();
 		post.setDescription(null);
 		post.setIdPost(null);
@@ -62,7 +64,7 @@ public class PostControllerTest {
 		assertNotNull("1");
 	}
 	@Test
-	void updatePost() {
+	void updatePost() throws IOException {
 		PostDTO post= new PostDTO();
 		postController.updatePost(post);
 		assertNotNull("1");

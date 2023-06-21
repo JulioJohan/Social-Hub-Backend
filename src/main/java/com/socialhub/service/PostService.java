@@ -1,5 +1,6 @@
 package com.socialhub.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,13 @@ public class PostService implements IPostService{
 	
 	@Autowired
 	private IUserRepository userRepository;
+	
+	@Autowired
+	private FirebaseStorageStrategyService firebaseStorageStrategyService;
 
+	/**
+	 * Buscar todos los post que se encuentran en la base de datos.
+	 */
 	@Override
 	public Response<Post> findAllPost() {
 		
@@ -55,6 +62,9 @@ public class PostService implements IPostService{
 		return response;
 	}
 
+	/**
+	 * Busca un publicacion por medio del ID
+	 */
 	@Override
 	public Response<Post> findByIdPost(Integer idPost) {
 		//Response que se regresara.
@@ -117,7 +127,7 @@ public class PostService implements IPostService{
 	}
 
 	@Override
-	public Response<Post> createPost(PostDTO post) {
+	public Response<Post> createPost(PostDTO post) throws IOException {
 		
 		Response<Post> response= new Response<Post>();
 		
@@ -127,9 +137,15 @@ public class PostService implements IPostService{
 			user= optionalUser.get();
 			Post postSave= new Post();
 			Post postSaveOk= new Post();
+			String linkFirebase="";
+			if(post.getMultipartFile()!=null) {
+				String[] url= firebaseStorageStrategyService.uploadFile(post.getMultipartFile());
+				linkFirebase= url[0];
+			}
+
 			try {
 				postSave.setDescription(post.getDescription());
-				postSave.setMultimedia(post.getMultimedia());
+				postSave.setMultimedia(linkFirebase);
 				postSave.setNumLike(post.getNumLike());
 				postSave.setShare(post.getShare());
 				postSave.setUser(user);
@@ -159,7 +175,7 @@ public class PostService implements IPostService{
 	}
 
 	@Override
-	public Response<Post> updatePost(PostDTO post) {
+	public Response<Post> updatePost(PostDTO post) throws IOException {
 		Response<Post> response= new Response<Post>();
 		
 		Optional<Post> optionalPost =postRepository.findById(post.getIdPost());
@@ -172,13 +188,20 @@ public class PostService implements IPostService{
 			postFind= optionalPost.get();
 //			Post postSave= new Post();
 			Post postSaveOk= new Post();
+			
+			String linkFirebase="";
+			if(post.getMultipartFile()!=null) {
+				String[] url= firebaseStorageStrategyService.uploadFile(post.getMultipartFile());
+				linkFirebase= url[0];
+			}
+			
 			try {
 				
 				if(post.getDescription()!=null||!"".equals(post.getDescription())) {
 					postFind.setDescription(post.getDescription());
 				}
-				if(post.getMultimedia()!=null||"".equals(post.getMultimedia())) {
-					postFind.setMultimedia(post.getMultimedia());
+				if(post.getMultipartFile()!=null) {
+					postFind.setMultimedia(linkFirebase);
 				}
 //				if(post.getNumLike()!=null||post.getNumLike()!=0) {
 //					postFind.setNumLike(post.getNumLike());
