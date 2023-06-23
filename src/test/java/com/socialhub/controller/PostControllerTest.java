@@ -60,13 +60,13 @@ public class PostControllerTest {
 		post.getShare();
 		post.getUser();
 		
-		postController.createPost(post);
+		postController.createPost(post, 1);
 		assertNotNull("1");
 	}
 	@Test
 	void updatePost() throws IOException {
 		PostDTO post= new PostDTO();
-		postController.updatePost(post);
+		postController.updatePost(post, 0);
 		assertNotNull("1");
 	}
 	@Test

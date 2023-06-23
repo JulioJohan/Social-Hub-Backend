@@ -127,7 +127,7 @@ public class PostService implements IPostService{
 	}
 
 	@Override
-	public Response<Post> createPost(PostDTO post) throws IOException {
+	public Response<Post> createPost(PostDTO post, Integer redSocial) throws IOException {
 		
 		Response<Post> response= new Response<Post>();
 		
@@ -139,7 +139,7 @@ public class PostService implements IPostService{
 			Post postSaveOk= new Post();
 			String linkFirebase="";
 			if(post.getMultipartFile()!=null) {
-				String[] url= firebaseStorageStrategyService.uploadFile(post.getMultipartFile());
+				String[] url= firebaseStorageStrategyService.uploadFile(post.getMultipartFile(), redSocial);
 				linkFirebase= url[0];
 			}
 
@@ -175,7 +175,7 @@ public class PostService implements IPostService{
 	}
 
 	@Override
-	public Response<Post> updatePost(PostDTO post) throws IOException {
+	public Response<Post> updatePost(PostDTO post, Integer redSocial) throws IOException {
 		Response<Post> response= new Response<Post>();
 		
 		Optional<Post> optionalPost =postRepository.findById(post.getIdPost());
@@ -191,7 +191,7 @@ public class PostService implements IPostService{
 			
 			String linkFirebase="";
 			if(post.getMultipartFile()!=null) {
-				String[] url= firebaseStorageStrategyService.uploadFile(post.getMultipartFile());
+				String[] url= firebaseStorageStrategyService.uploadFile(post.getMultipartFile(), redSocial);
 				linkFirebase= url[0];
 			}
 			

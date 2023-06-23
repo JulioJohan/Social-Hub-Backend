@@ -11,8 +11,8 @@ public interface IPostService {
 	public Response<Post> findAllPost();
 	public Response<Post> findByIdPost(Integer idPost);
 	public Response<Post> findByUserPost(Integer idUsuario);
-	public Response<Post> createPost(PostDTO post) throws IOException;
-	public Response<Post> updatePost(PostDTO post) throws IOException;
+	public Response<Post> createPost(PostDTO post, Integer redSocial) throws IOException;
+	public Response<Post> updatePost(PostDTO post, Integer redSocial) throws IOException;
 	public Response<Post> deletePost(Integer idPost);
 	
 	public Response<Post> sumLike(Integer idPost);
