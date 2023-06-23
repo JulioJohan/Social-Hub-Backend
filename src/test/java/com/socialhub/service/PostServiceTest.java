@@ -92,7 +92,7 @@ public class PostServiceTest {
 		PostDTO post = new PostDTO();
 		post.setUser(1);
 		when(iUserRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new User()));
-		Response<Post> response= postService.createPost(post);
+		Response<Post> response= postService.createPost(post, 1);
 		assertNotNull(response);
 	}
 	
@@ -101,7 +101,7 @@ public class PostServiceTest {
 		PostDTO post = new PostDTO();
 		post.setUser(1);
 //		when(iUserRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new User()));
-		Response<Post> response= postService.createPost(post);
+		Response<Post> response= postService.createPost(post, 0);
 		assertNotNull(response);
 	}
 	
@@ -111,7 +111,7 @@ public class PostServiceTest {
 		post.setUser(1);
 		when(iUserRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new User()));
         when(iPostRepository.save(Mockito.any())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
-		Response<Post> response= postService.createPost(post);
+		Response<Post> response= postService.createPost(post, 1);
 		assertNotNull(response);
 	}
 	
@@ -119,7 +119,7 @@ public class PostServiceTest {
 	void updatePostTest() throws IOException {
 		PostDTO post = new PostDTO();
 		post.setUser(1);
-		Response<Post> response= postService.updatePost(post);
+		Response<Post> response= postService.updatePost(post, 1);
 		assertNotNull(response);
 	}
 	
@@ -128,7 +128,7 @@ public class PostServiceTest {
 		PostDTO post = new PostDTO();
 		post.setIdPost(1);
 		when(iPostRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new Post()));
-		Response<Post> response= postService.updatePost(post);
+		Response<Post> response= postService.updatePost(post, 1);
 		assertNotNull(response);
 	}
 	
@@ -139,7 +139,7 @@ public class PostServiceTest {
 		when(iPostRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new Post()));
         when(iPostRepository.save(Mockito.any())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
 
-		Response<Post> response= postService.updatePost(post);
+		Response<Post> response= postService.updatePost(post, 1);
 		assertNotNull(response);
 	}
 	

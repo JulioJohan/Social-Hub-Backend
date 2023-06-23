@@ -82,11 +82,14 @@ public class PostController {
 	 * @return ResponseEntity con el post creado en el cuerpo de la respuesta.
 	 * @throws IOException si ocurre algún error relacionado con la entrada/salida de datos.
 	 */
-	@PostMapping(path = "/createPost", produces = MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(path = "/createPost/{tipoPost}", produces = MediaType.APPLICATION_JSON_VALUE,
 	            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<Response<Post>> createPost(@ModelAttribute PostDTO post) throws IOException {
+	public ResponseEntity<Response<Post>> createPost(@ModelAttribute PostDTO post, @PathVariable("tipoPost") Integer tipoPost) throws IOException {
 	    // Invoca al servicio para crear el post utilizando los datos proporcionados
-	    Response<Post> response = postService.createPost(post);
+		
+		//Se envia el numero 0 para indicar que es una publicacion de bookface
+		//Se envia el numero 1 para indicar que es una publicacion de toktic
+	    Response<Post> response = postService.createPost(post, tipoPost);
 
 	    // Retorna una respuesta con el post creado y el estado HTTP OK (200)
 	    return new ResponseEntity<>(response, HttpStatus.OK);
@@ -100,11 +103,13 @@ public class PostController {
 	 * @return ResponseEntity con el post actualizado en el cuerpo de la respuesta.
 	 * @throws IOException si ocurre algún error relacionado con la entrada/salida de datos.
 	 */
-	@PutMapping(path = "/updatePost", produces = MediaType.APPLICATION_JSON_VALUE,
+	@PutMapping(path = "/updatePost/{tipoPost}", produces = MediaType.APPLICATION_JSON_VALUE,
 	            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<Response<Post>> updatePost(@ModelAttribute PostDTO post) throws IOException {
+	public ResponseEntity<Response<Post>> updatePost(@ModelAttribute PostDTO post, @PathVariable("tipoPost") Integer tipoPost) throws IOException {
 	    // Invoca al servicio para actualizar el post utilizando los datos proporcionados
-	    Response<Post> response = postService.updatePost(post);
+		//Se envia el numero 0 para indicar que es una publicacion de bookface
+		//Se envia el numero 1 para indicar que es una publicacion de toktic
+	    Response<Post> response = postService.updatePost(post, tipoPost);
 
 	    // Retorna una respuesta con el post actualizado y el estado HTTP OK (200)
 	    return new ResponseEntity<>(response, HttpStatus.OK);

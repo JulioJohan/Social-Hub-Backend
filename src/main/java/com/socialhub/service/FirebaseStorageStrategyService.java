@@ -45,7 +45,7 @@ public class FirebaseStorageStrategyService{
         projectId = "socialhub-30934";
         
         // Se crea un FileInputStream para leer el archivo de credenciales de servicio (serviceAccount.json)
-        FileInputStream serviceAccount = new FileInputStream("src/main/resources/serviceAccount.json");
+        FileInputStream serviceAccount = new FileInputStream("./serviceAccount.json");
         
         // Se construye la configuración de StorageOptions utilizando el ID del proyecto y las credenciales del servicio
         this.storageOptions = StorageOptions.newBuilder()
@@ -62,10 +62,19 @@ public class FirebaseStorageStrategyService{
      * @return un arreglo de String que contiene la URL del archivo subido y el nombre del objeto en Firebase Storage.
      * @throws IOException si ocurre algún error durante la lectura o escritura del archivo.
      */
-    public String[] uploadFile(MultipartFile multipartFile) throws IOException {
+    public String[] uploadFile(MultipartFile multipartFile, Integer redSocial) throws IOException {
         File file = convertMultiPartToFile(multipartFile);
         Path filePath = file.toPath();
-        String objectName = "bookface/" + generateFileName(multipartFile);
+        
+        String carpetaRedSocial="";
+        if(redSocial==0) {
+        	carpetaRedSocial="bookface/";
+        }
+        if(redSocial==1) {
+        	carpetaRedSocial="toktik/";
+        }
+        
+        String objectName = carpetaRedSocial + generateFileName(multipartFile);
 
         Storage storage = storageOptions.getService();
 
