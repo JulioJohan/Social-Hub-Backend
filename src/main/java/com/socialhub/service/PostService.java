@@ -329,6 +329,7 @@ public class PostService implements IPostService{
 			try {
 				// Se actualiza el número de likes utilizando el postRepository y el método sumLike().
 				postRepository.sumLike(idPost);
+				optional = postRepository.findById(idPost);
 				
 				// Se configuran los datos del response con la información correcta.
 				response.setMessage("Like actualizado correctamente.");
@@ -365,7 +366,8 @@ public class PostService implements IPostService{
 			try {
 				// Se resta el número de likes utilizando el postRepository y el método subtractLike().
 				postRepository.subtractLike(idPost);
-				
+				optional = postRepository.findById(idPost);
+
 				// Se configuran los datos del response con la información correcta.
 				response.setMessage("Like actualizado correctamente.");
 				response.setData(optional.get());
