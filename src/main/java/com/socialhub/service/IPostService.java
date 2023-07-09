@@ -9,6 +9,7 @@ import com.socialhub.model.entity.Response;
 public interface IPostService {
 
 	public Response<Post> findAllPost();
+	public Response<Post> findAllPost(int page, int size);
 	public Response<Post> findByIdPost(Integer idPost);
 	public Response<Post> findByUserPost(Integer idUsuario);
 	public Response<Post> createPost(PostDTO post, Integer redSocial) throws IOException;
