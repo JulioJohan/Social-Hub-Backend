@@ -20,6 +20,4 @@ public class GlobalExceptionHandler {
 
 
 
-
-    // Agrega más métodos para otros tipos de respuestas que necesites manejar
 }

@@ -7,6 +7,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +58,45 @@ public class PostService implements IPostService{
 			// Se arman los datos del response con la información correcta
 			response.setCount(posts.size());
 			response.setList(posts);
+			response.setStatus("OK");
+			response.setMessage("Publicaciones obtenidas correctamente.");
+			
+		} catch (DataAccessException e) {
+			// En caso de producirse una excepción de acceso a datos, se registra un error 
+			//y se configuran los datos del response correspondientes
+			log.error(e.getMessage());
+			response.setList(null);
+			response.setStatus("ERROR");
+			response.setMessage("Ocurrió un error al consultar las publicaciones.");
+			
+			// Se lanza una BusinessException para indicar el error y manejarlo en un nivel superior
+			throw new BusinessException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrió un error al consultar las publicaciones.");
+		}
+		
+		// Se retorna el response
+		return response;
+	}
+	/**
+	 * Buscar todos los posts que se encuentran en la base de datos.
+	 */
+	@Override
+	public Response<Post> findAllPost(int page, int size) {
+		
+		// Se crea una instancia de la clase Response que se retornará
+		Response<Post> response = new Response<Post>();
+		
+		// Se crea una lista vacía de posts
+		List<Post> posts = new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, size);
+		
+		try {
+			// Se obtienen todos los posts de la base de datos utilizando el postRepository
+//			posts = postRepository.findAll(pageable);
+			Page<Post> pageData = postRepository.findAll(pageable);
+			long total= pageData.getTotalElements();
+			// Se arman los datos del response con la información correcta
+			response.setCount((int) total);
+			response.setList(pageData.getContent());
 			response.setStatus("OK");
 			response.setMessage("Publicaciones obtenidas correctamente.");
 			

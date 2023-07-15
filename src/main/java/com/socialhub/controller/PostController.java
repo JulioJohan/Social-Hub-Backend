@@ -42,6 +42,19 @@ public class PostController {
 	    // Retorna una respuesta con la lista de posts y el estado HTTP OK (200)
 	    return new ResponseEntity<Response<Post>> (response, HttpStatus.OK);
 	}
+	/**
+	 * Maneja la solicitud para obtener todos las publicaciones existentes.
+	 * 
+	 * @return ResponseEntity con una lista de posts en el cuerpo de la respuesta.
+	 */
+	@GetMapping(path = "/findAllPost/{page}/{size}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Response<Post>> findAllPost(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
+		// Invoca al servicio para obtener todos los posts
+		Response<Post> response = postService.findAllPost(page, size);
+		
+		// Retorna una respuesta con la lista de posts y el estado HTTP OK (200)
+		return new ResponseEntity<Response<Post>> (response, HttpStatus.OK);
+	}
 
 	/**
 	 * Maneja la solicitud para obtener un post específico por su ID.
