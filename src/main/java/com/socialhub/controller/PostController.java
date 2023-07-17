@@ -43,7 +43,7 @@ public class PostController {
 	    return new ResponseEntity<Response<Post>> (response, HttpStatus.OK);
 	}
 	/**
-	 * Maneja la solicitud para obtener todos las publicaciones existentes.
+	 * Maneja la solicitud para obtener todos las publicaciones existentes por paginaciones	.
 	 * 
 	 * @return ResponseEntity con una lista de posts en el cuerpo de la respuesta.
 	 */

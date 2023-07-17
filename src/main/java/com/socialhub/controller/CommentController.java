@@ -34,6 +34,20 @@ public class CommentController {
         // Retorna una respuesta con la lista de comentarios y el estado HTTP OK (200)
         return new ResponseEntity<Response<Comment>> (response, HttpStatus.OK);
     }
+    
+    /**
+     * Maneja la solicitud para obtener todos los componentes existentes por paginaciones.
+     *
+     * @return ResponseEntity con una lista de comentarios en el cuerpo de la respuesta.
+     */
+    @GetMapping(path = "/findAllComment/{page}/{size}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response<Comment>> findAllPost(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
+        // Invoca al servicio para obtener todos los comentarios
+        Response<Comment> response = commentService.findAllComment(page, size);
+
+        // Retorna una respuesta con la lista de comentarios y el estado HTTP OK (200)
+        return new ResponseEntity<Response<Comment>> (response, HttpStatus.OK);
+    }
 
     /**
      * Maneja la solicitud para obtener un comentario específico por su ID.
