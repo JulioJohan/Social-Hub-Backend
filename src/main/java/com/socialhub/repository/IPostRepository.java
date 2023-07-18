@@ -32,6 +32,6 @@ public interface IPostRepository extends JpaRepository<Post, Integer>{
 			+ "", nativeQuery=true)
 	void subtractLike(@Param("idPost") Integer idPost);
 	
-	Page<Post> findAll(Pageable pageable);
+	Page<Post> findAllByOrderByDateRegistrationDesc(Pageable pageable);
 
 }

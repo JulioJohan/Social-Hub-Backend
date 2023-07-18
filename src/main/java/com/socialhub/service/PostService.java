@@ -92,7 +92,7 @@ public class PostService implements IPostService{
 		try {
 			// Se obtienen todos los posts de la base de datos utilizando el postRepository
 //			posts = postRepository.findAll(pageable);
-			Page<Post> pageData = postRepository.findAll(pageable);
+			Page<Post> pageData = postRepository.findAllByOrderByDateRegistrationDesc(pageable);
 			long total= pageData.getTotalElements();
 			// Se arman los datos del response con la información correcta
 			response.setCount((int) total);
@@ -227,8 +227,8 @@ public class PostService implements IPostService{
 				// Se configuran los datos de la publicación a guardar.
 				postSave.setDescription(post.getDescription());
 				postSave.setMultimedia(linkFirebase);
-				postSave.setNumLike(post.getNumLike());
-				postSave.setShare(post.getShare());
+				postSave.setNumLike(0);
+				postSave.setShare("0");
 				postSave.setUser(user);
 				
 				// Se guarda la publicación utilizando el postRepository.

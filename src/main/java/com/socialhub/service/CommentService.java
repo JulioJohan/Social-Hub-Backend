@@ -7,6 +7,9 @@ import com.socialhub.repository.IPostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +55,35 @@ public class CommentService implements ICommentService{
 			comments = commentRepository.findAll();
 			response.setCount(comments.size());
 			response.setList(comments);
+			response.setStatus("OK");
+			response.setMessage("Comentarios obteneidos con exito.");
+		}catch (DataAccessException e){
+			// En caso de producirse una excepción de acceso a datos, se registra un error
+			log.error(e.getMessage());
+			// Se lanza una BusinessException para indicar el error y manejarlo en un nivel superior
+			throw new BusinessException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrio unn error al consultar las publicaciones");
+		}
+
+		return response;
+	}
+	
+	@Override
+	public Response<Comment> findAllComment(int page, int size) {
+		// Se crea una instancia de la clase Response que se retornará
+		Response<Comment> response = new Response<Comment>();
+
+		//Se crea lista vacia de post.
+		List<Comment> comments= new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, size);
+
+
+		try {
+//			comments = commentRepository.findAll();
+			Page<Comment> pageData = commentRepository.findAllByOrderByDateRegistrationDesc(pageable);
+			long total= pageData.getTotalElements();
+
+			response.setCount((int) total);
+			response.setList(pageData.getContent());
 			response.setStatus("OK");
 			response.setMessage("Comentarios obteneidos con exito.");
 		}catch (DataAccessException e){

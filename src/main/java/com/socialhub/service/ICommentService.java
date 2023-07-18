@@ -9,6 +9,7 @@ import java.io.IOException;
 public interface ICommentService {
 	
 	public Response<Comment> findAllComment();
+	public Response<Comment> findAllComment(int page, int size);
 	public Response<Comment> findByIdComment(Integer idComment);
 	public Response<Comment> findByPostComment(Integer idUsuario);
 	public Response<Comment> createComment(CommentDTO comment) throws IOException;

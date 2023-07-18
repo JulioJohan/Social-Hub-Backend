@@ -1,8 +1,11 @@
 package com.socialhub.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.socialhub.model.entity.Comment;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,5 +35,5 @@ public interface ICommentRepository extends JpaRepository<Comment, Integer>{
             + "", nativeQuery=true)
     void subtractLike(@Param("idComment") Integer idComment);
 
-
+    Page<Comment> findAllByOrderByDateRegistrationDesc(Pageable pageable);
 }
