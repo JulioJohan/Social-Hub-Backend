@@ -234,9 +234,19 @@ public class CommentService implements ICommentService{
 					linkFirebase = url[0];
 					commentFind.setMultimedia(linkFirebase);
 				}
+				
+				log.info( "getMultimedia"+comment.getMultimedia());
+
+				if(comment.getMultimedia().equals(null) || comment.getMultimedia().equals("null")) {
+					log.info("Entre condicion");
+					commentFind.setMultimedia(null);
+				}
+				log.info( "commentFind"+commentFind.getMultimedia());
 
 				//Se guarda el comentario
 				comment1Update= commentRepository.save(commentFind);
+				log.info( "getMultimedia"+comment1Update.getMultimedia());
+
 				// Se configuran los datos del response con la información correcta.
 				response.setData(comment1Update);
 				response.setMessage("Comentario actualizado con éxito.");
