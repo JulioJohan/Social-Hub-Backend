@@ -29,6 +29,8 @@ public class PostDTO implements Serializable{
 	
 	private Integer user;
 	
+	private Integer type;
+	
 	@Transient
 	private transient MultipartFile multipartFile;
 	

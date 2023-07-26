@@ -50,7 +50,21 @@ public class PostController {
 	@GetMapping(path = "/findAllPost/{page}/{size}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Response<Post>> findAllPost(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
 		// Invoca al servicio para obtener todos los posts
-		Response<Post> response = postService.findAllPost(page, size);
+		Response<Post> response = postService.findAllPost(1,page, size);
+		
+		// Retorna una respuesta con la lista de posts y el estado HTTP OK (200)
+		return new ResponseEntity<Response<Post>> (response, HttpStatus.OK);
+	}
+	
+	/**
+	 * Maneja la solicitud para obtener todos las publicaciones existentes por paginaciones	de la red social toktik.
+	 * 
+	 * @return ResponseEntity con una lista de posts en el cuerpo de la respuesta.
+	 */
+	@GetMapping(path = "/findAllPostToktik/{page}/{size}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Response<Post>> findAllPostToktik(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
+		// Invoca al servicio para obtener todos los posts
+		Response<Post> response = postService.findAllPost(2,page, size);
 		
 		// Retorna una respuesta con la lista de posts y el estado HTTP OK (200)
 		return new ResponseEntity<Response<Post>> (response, HttpStatus.OK);
@@ -101,8 +115,16 @@ public class PostController {
 		
 		//Se envia el numero 0 para indicar que es una publicacion de bookface
 		//Se envia el numero 1 para indicar que es una publicacion de toktic
-	    Response<Post> response = postService.createPost(post, tipoPost);
-
+		
+		//Se ajusto el metodo para indicar los nuevos valores
+		Integer tipo= null;
+		if (tipoPost==0) {
+			tipo = 1;
+		}else {
+			tipo = 2;
+		}
+	    Response<Post> response = postService.createPost(post, tipoPost, tipo);
+	    
 	    // Retorna una respuesta con el post creado y el estado HTTP OK (200)
 	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}

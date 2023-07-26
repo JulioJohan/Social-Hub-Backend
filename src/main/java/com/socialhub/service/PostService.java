@@ -80,7 +80,7 @@ public class PostService implements IPostService{
 	 * Buscar todos los posts que se encuentran en la base de datos.
 	 */
 	@Override
-	public Response<Post> findAllPost(int page, int size) {
+	public Response<Post> findAllPost(int type,int page, int size) {
 		
 		// Se crea una instancia de la clase Response que se retornará
 		Response<Post> response = new Response<Post>();
@@ -92,7 +92,7 @@ public class PostService implements IPostService{
 		try {
 			// Se obtienen todos los posts de la base de datos utilizando el postRepository
 //			posts = postRepository.findAll(pageable);
-			Page<Post> pageData = postRepository.findAllByOrderByDateRegistrationDesc(pageable);
+			Page<Post> pageData = postRepository.findAllByTypeOrderByDateRegistrationDesc(type,pageable);
 			long total= pageData.getTotalElements();
 			// Se arman los datos del response con la información correcta
 			response.setCount((int) total);
@@ -199,7 +199,7 @@ public class PostService implements IPostService{
 	}
 
 	@Override
-	public Response<Post> createPost(PostDTO post, Integer redSocial) throws IOException {
+	public Response<Post> createPost(PostDTO post, Integer redSocial, Integer type) throws IOException {
 		
 		// Se crea una instancia de la clase Response que se retornará.
 		Response<Post> response = new Response<Post>();
@@ -230,6 +230,7 @@ public class PostService implements IPostService{
 				postSave.setNumLike(0);
 				postSave.setShare("0");
 				postSave.setUser(user);
+				postSave.setType(type);
 				
 				// Se guarda la publicación utilizando el postRepository.
 				postSaveOk = postRepository.save(postSave);

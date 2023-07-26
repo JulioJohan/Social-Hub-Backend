@@ -34,6 +34,11 @@ public class PostControllerTest {
 		assertNotNull("1");
 	}
 	@Test
+	void findAllPost2Test() {
+		postController.findAllPost(1, 1);
+		assertNotNull("1");
+	}
+	@Test
 	void findByIdPost() {
 		postController.findByIdPost(1);
 		assertNotNull("1");
