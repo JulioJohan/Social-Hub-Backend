@@ -2,6 +2,8 @@ package com.socialhub.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -29,5 +31,7 @@ public interface IPostRepository extends JpaRepository<Post, Integer>{
 			+ "WHERE id_post = :idPost"
 			+ "", nativeQuery=true)
 	void subtractLike(@Param("idPost") Integer idPost);
+	
+	Page<Post> findAllByOrderByDateRegistrationDesc(Pageable pageable);
 
 }

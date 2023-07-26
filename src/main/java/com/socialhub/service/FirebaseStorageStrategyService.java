@@ -73,6 +73,10 @@ public class FirebaseStorageStrategyService{
         if(redSocial==1) {
         	carpetaRedSocial="toktik/";
         }
+
+        if(redSocial==2) {
+            carpetaRedSocial="comments/";
+        }
         
         String objectName = carpetaRedSocial + generateFileName(multipartFile);
 
