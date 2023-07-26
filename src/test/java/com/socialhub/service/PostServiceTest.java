@@ -112,7 +112,7 @@ public class PostServiceTest {
 		PostDTO post = new PostDTO();
 		post.setUser(1);
 		when(iUserRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new User()));
-		Response<Post> response= postService.createPost(post, 1);
+		Response<Post> response= postService.createPost(post, 1, 1);
 		assertNotNull(response);
 	}
 	
@@ -122,7 +122,7 @@ public class PostServiceTest {
 			PostDTO post = new PostDTO();
 			post.setUser(1);
 //			when(iUserRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new User()));
-			Response<Post> response= postService.createPost(post, 0);
+			Response<Post> response= postService.createPost(post, 0, 1);
 			assertNotNull(response);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -136,7 +136,7 @@ public class PostServiceTest {
 			post.setUser(1);
 			when(iUserRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(new User()));
 	        when(iPostRepository.save(Mockito.any())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
-			Response<Post> response= postService.createPost(post, 1);
+			Response<Post> response= postService.createPost(post, 1, 1);
 			assertNotNull(response);
 		} catch (Exception e) {
 			// TODO: handle exception
