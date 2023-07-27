@@ -224,7 +224,7 @@ public class CommentService implements ICommentService{
 			if (optionalComment.isPresent()){
 				commentFind= optionalComment.get();
 
-				if(comment.getDescripcion()!=null || comment.getDescripcion().equals("")){
+				if(comment.getDescripcion()!=null){
 					commentFind.setDescripcion(comment.getDescripcion());
 				}
 				//ASigando multimedia
@@ -235,17 +235,13 @@ public class CommentService implements ICommentService{
 					commentFind.setMultimedia(linkFirebase);
 				}
 				
-				log.info( "getMultimedia"+comment.getMultimedia());
 
-				if(comment.getMultimedia().equals(null) || comment.getMultimedia().equals("null")) {
-					log.info("Entre condicion");
+				if(comment.getMultimedia().equals("null")) {
 					commentFind.setMultimedia(null);
 				}
-				log.info( "commentFind"+commentFind.getMultimedia());
 
 				//Se guarda el comentario
 				comment1Update= commentRepository.save(commentFind);
-				log.info( "getMultimedia"+comment1Update.getMultimedia());
 
 				// Se configuran los datos del response con la información correcta.
 				response.setData(comment1Update);

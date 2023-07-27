@@ -2,6 +2,8 @@ package com.socialhub.model.dto;
 
 import java.io.Serializable;
 
+import javax.annotation.Nullable;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Transient;
@@ -29,7 +31,8 @@ public class CommentDTO implements Serializable{
 
     private Integer post;
 
-    @Transient
+    @Transient 
+    @Nullable
     private transient MultipartFile multipartFile;
 
     // Getters y Setters generados automáticamente por Lombok

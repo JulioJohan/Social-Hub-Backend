@@ -2,7 +2,6 @@ package com.socialhub.controller;
 
 import com.socialhub.model.dto.CommentDTO;
 import com.socialhub.model.entity.Comment;
-import com.socialhub.model.entity.Post;
 import com.socialhub.model.entity.Response;
 import com.socialhub.service.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+
+import javax.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -89,7 +90,7 @@ public class CommentController {
      */
     @PostMapping(path = "/createComment", produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Response<Comment>> createComment(@ModelAttribute CommentDTO comment) throws IOException {
+    public ResponseEntity<Response<Comment>> createComment(@Valid @ModelAttribute CommentDTO comment) throws IOException {
         // Invoca al servicio para crear el post utilizando los datos proporcionados
 
         //Se envia el numero 0 para indicar que es una publicacion de bookface
