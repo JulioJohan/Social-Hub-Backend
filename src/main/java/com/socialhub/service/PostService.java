@@ -163,7 +163,7 @@ public class PostService implements IPostService{
 
 
 	@Override
-	public Response<Post> findByUserPost(Integer idUsuario) {
+	public Response<Post> findByUserPost(Integer type, Integer idUsuario) {
 		// Se crea una instancia de la clase Response que se retornará.
 		Response<Post> response = new Response<Post>();
 		
@@ -171,7 +171,7 @@ public class PostService implements IPostService{
 		
 		try {
 			// Se buscan las publicaciones del usuario utilizando el postRepository y el método findByUserIdUser().
-			posts = postRepository.findByUserIdUser(idUsuario);
+			posts = postRepository.findByTypeAndUserIdUser(type, idUsuario);
 			
 			// Se construye el mensaje dependiendo de si se encontraron publicaciones o no.
 			String mensaje = (posts.size() > 0) ? "Publicaciones del usuario obtenidas correctamente." : "No hay publicaciones para este usuario.";

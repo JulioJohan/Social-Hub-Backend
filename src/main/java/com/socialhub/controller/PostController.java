@@ -91,10 +91,10 @@ public class PostController {
 	 * @param idUsuario el ID del usuario cuyos posts se desean buscar.
 	 * @return ResponseEntity con una lista de posts del usuario en el cuerpo de la respuesta.
 	 */
-	@GetMapping(path = "/findByUserPost/{idUsuario}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Response<Post>> findByUserPost(@PathVariable("idUsuario") Integer idUsuario){
+	@GetMapping(path = "/findByUserPost/{idUsuario}/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Response<Post>> findByUserPost(@PathVariable("idUsuario") Integer idUsuario, @PathVariable("type") Integer type){
 	    // Invoca al servicio para buscar los posts del usuario por su ID
-	    Response<Post> response = postService.findByUserPost(idUsuario);
+	    Response<Post> response = postService.findByUserPost(type, idUsuario);
 	    
 	    // Retorna una respuesta con la lista de posts del usuario y el estado HTTP OK (200)
 	    return new ResponseEntity<Response<Post>> (response, HttpStatus.OK);
