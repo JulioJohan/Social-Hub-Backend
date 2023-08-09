@@ -45,7 +45,7 @@ public class PostControllerTest {
 	}
 	@Test
 	void findByUserPost() {
-		postController.findByUserPost(1);
+		postController.findByUserPost(1, 1);
 		assertNotNull("1");
 	}
 	@Test

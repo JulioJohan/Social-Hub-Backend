@@ -91,15 +91,15 @@ public class PostServiceTest {
 	
 	@Test
 	void findByUserPostTest() {
-		Response<Post> response= postService.findByUserPost(1);
+		Response<Post> response= postService.findByUserPost(1, 1);
 		assertNotNull(response);
 	}
 	
 	@Test
 	void findByUserPost2Test() {
 		try {
-	        when(iPostRepository.findByUserIdUser(Mockito.any())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
-			Response<Post> response= postService.findByUserPost(1);
+	        when(iPostRepository.findByTypeAndUserIdUser(Mockito.any(), Mockito.any())).thenThrow(new DataAccessException("Simulated DataAccessException") {});
+			Response<Post> response= postService.findByUserPost(1, 1);
 			assertNotNull(response);
 		} catch (Exception e) {
 			// TODO: handle exception
