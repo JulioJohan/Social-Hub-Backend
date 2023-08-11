@@ -14,4 +14,4 @@ Este repositorio contiene el backend de servicios que sirve para las publicacion
 1. **Clona el repositorio:** Abre una terminal y ejecuta el siguiente comando para clonar este repositorio:
 
    ```sh
-  https://github.com/JulioJohan/Social-Hub-Backend.git
+   https://github.com/JulioJohan/Social-Hub-Backend.git
