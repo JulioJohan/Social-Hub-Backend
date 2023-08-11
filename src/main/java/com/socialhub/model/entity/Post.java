@@ -49,6 +49,9 @@ public class Post implements Serializable{
 	@Column(name = "share",nullable = false)
 	private String share;
 	
+	@Column(name = "type", nullable = false)
+	private Integer type;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_user",nullable = false)
 	private User user;

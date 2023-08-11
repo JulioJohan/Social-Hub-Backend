@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.socialhub.model.entity.Post;
 
 public interface IPostRepository extends JpaRepository<Post, Integer>{
-	List<Post> findByUserIdUser(Integer idUser);
-	
+	List<Post> findByTypeAndUserIdUser(Integer type,Integer idUser);
+
 	@Transactional
     @Modifying
 	@Query(value="UPDATE post "
@@ -32,6 +32,6 @@ public interface IPostRepository extends JpaRepository<Post, Integer>{
 			+ "", nativeQuery=true)
 	void subtractLike(@Param("idPost") Integer idPost);
 	
-	Page<Post> findAllByOrderByDateRegistrationDesc(Pageable pageable);
+	Page<Post> findAllByTypeOrderByDateRegistrationDesc(Integer type, Pageable pageable);
 
 }
