@@ -27,4 +27,4 @@ Este repositorio contiene el backend de servicios que sirve para las publicacion
    java -jar target/Social-Hub-0.0.2-SNAPSHOT.jar
 7. Verifica que se haya iniciado correctamente
    ```sh
-   http://localhost:8081/
+   http://localhost:8081/swagger-ui/index.html#/
