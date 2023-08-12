@@ -21,10 +21,11 @@ Este repositorio contiene el backend de servicios que sirve para las publicacion
 4. Construye el archivo JAR: Utiliza Maven para construir el archivo JAR del proyecto.
    ```sh
    mvn clean package
-5. Encuentra el archivo JAR: Una vez que la construcción sea exitosa, podrás encontrar el archivo JAR en la carpeta target del proyecto.
-6. Ejecuta el archivo JAR: Utiliza el siguiente comando para ejecutar el archivo JAR:
+5. Encuentra el archivo JAR en la capeta target: Una vez que la construcción sea exitosa, podrás encontrar el archivo JAR en la carpeta target del proyecto.
+6. Descarga el archivo de claves [KEYS](https://drive.google.com/file/d/1_JWXu6t4zi4mEW9JLJLeC6-qrFnzthy1/view?usp=sharing) a la carpeta target.
+7. Ejecuta el archivo JAR: Utiliza el siguiente comando para ejecutar el archivo JAR:
    ```sh
    java -jar target/Social-Hub-0.0.2-SNAPSHOT.jar
-7. Verifica que se haya iniciado correctamente
+8. Verifica que se haya iniciado correctamente
    ```sh
    http://localhost:8081/swagger-ui/index.html#/
