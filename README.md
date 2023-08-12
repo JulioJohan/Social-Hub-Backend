@@ -15,3 +15,16 @@ Este repositorio contiene el backend de servicios que sirve para las publicacion
 
    ```sh
    https://github.com/JulioJohan/Social-Hub-Backend.git
+2. Accede al directorio del proyecto.
+   ```sh
+   cd Social-Hub-Backend
+4. Construye el archivo JAR: Utiliza Maven para construir el archivo JAR del proyecto.
+   ```sh
+   mvn clean package
+5. Encuentra el archivo JAR: Una vez que la construcción sea exitosa, podrás encontrar el archivo JAR en la carpeta target del proyecto.
+6. Ejecuta el archivo JAR: Utiliza el siguiente comando para ejecutar el archivo JAR:
+   ```sh
+   java -jar target/Social-Hub-0.0.2-SNAPSHOT.jar
+7. Verifica que se haya iniciado correctamente
+   ```sh
+   http://localhost:8081/
