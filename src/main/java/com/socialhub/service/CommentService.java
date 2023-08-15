@@ -56,12 +56,12 @@ public class CommentService implements ICommentService{
 			response.setCount(comments.size());
 			response.setList(comments);
 			response.setStatus("OK");
-			response.setMessage("Comentarios obteneidos con exito.");
+			response.setMessage("Comentarios obtenidos con éxito.");
 		}catch (DataAccessException e){
 			// En caso de producirse una excepción de acceso a datos, se registra un error
 			log.error(e.getMessage());
 			// Se lanza una BusinessException para indicar el error y manejarlo en un nivel superior
-			throw new BusinessException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrio unn error al consultar las publicaciones");
+			throw new BusinessException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrió un error al consultar las publicaciones.");
 		}
 
 		return response;
@@ -85,12 +85,12 @@ public class CommentService implements ICommentService{
 			response.setCount((int) total);
 			response.setList(pageData.getContent());
 			response.setStatus("OK");
-			response.setMessage("Comentarios obteneidos con exito.");
+			response.setMessage("Comentarios obtenidos con éxito.");
 		}catch (DataAccessException e){
 			// En caso de producirse una excepción de acceso a datos, se registra un error
 			log.error(e.getMessage());
 			// Se lanza una BusinessException para indicar el error y manejarlo en un nivel superior
-			throw new BusinessException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrio unn error al consultar las publicaciones");
+			throw new BusinessException(HttpStatus.INTERNAL_SERVER_ERROR, "Ocurrió un error al consultar las publicaciones.");
 		}
 
 		return response;
@@ -130,7 +130,7 @@ public class CommentService implements ICommentService{
 			comments= commentRepository.findByPostIdPost(idPost);
 
 			// Se construye el mensaje dependiendo de si se encontraron publicaciones o no.
-			String mensaje = (comments.size() > 0) ? "Comentarios del usuario obtenidas correctamente." : "No hay comentarios para este usuario.";
+			String mensaje = (comments.size() > 0) ? "Comentarios del usuario obtenidos correctamente." : "No hay comentarios para este usuario.";
 
 			// Se configuran los datos del response con la información correcta.
 			response.setCount(comments.size());
@@ -271,11 +271,11 @@ public class CommentService implements ICommentService{
 
 		try {
 			commentRepository.deleteById(idPost);
-			response.setMessage("Comentario eliminado con exitó");
+			response.setMessage("Comentario eliminado con éxito.");
 			response.setStatus("OK");
 		}catch (DataAccessException e){
 			log.error(e.getMessage());
-			throw new BusinessException(HttpStatus.BAD_REQUEST, "Comentario eliminado con exito.");
+			throw new BusinessException(HttpStatus.BAD_REQUEST, "Comentario eliminado con éxito.");
 		}
 		return response;
 	}
