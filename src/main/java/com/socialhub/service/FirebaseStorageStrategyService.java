@@ -43,7 +43,7 @@ public class FirebaseStorageStrategyService{
 
     private InputStream createFirebaseCredential() throws Exception {
         //private key
-        String privateKey = environment.getRequiredProperty("FIREBASE_PRIVATE_KEY");
+        String privateKey = environment.getRequiredProperty("FIREBASE_PRIVATE_KEY").replace("\\n", "\n");
 
         FirebaseCredential firebaseCredential = new FirebaseCredential();
         firebaseCredential.setType(environment.getRequiredProperty("FIREBASE_TYPE"));
