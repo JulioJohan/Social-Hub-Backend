@@ -80,8 +80,10 @@ public class FirebaseStorageStrategyService{
      */
     @PostConstruct
     private void initializeFirebase() throws Exception {
-        bucketName = "socialhub-30934.appspot.com";
-        projectId = "socialhub-30934";
+        bucketName = environment.getRequiredProperty("FIREBASE_BUCKET_NAME");
+        projectId = environment.getRequiredProperty("FIREBASE_PROJECT_ID");
+//        bucketName = "socialhub-30934.appspot.com";
+//        projectId = "socialhub-30934";
         
         // Se crea un FileInputStream para leer el archivo de credenciales de servicio (serviceAccount.json)
 //        FileInputStream serviceAccount = new FileInputStream("./serviceAccount.json");
