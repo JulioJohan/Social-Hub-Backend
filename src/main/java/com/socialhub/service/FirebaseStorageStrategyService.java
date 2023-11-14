@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
@@ -11,6 +12,11 @@ import java.util.Objects;
 
 import javax.annotation.PostConstruct;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.socialhub.model.dto.FirebaseCredential;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +36,34 @@ public class FirebaseStorageStrategyService{
     private String bucketName;
     private String projectId;
 
+    @Autowired
+    private Environment environment;
+
+
+    private InputStream createFirebaseCredential() throws Exception {
+        //private key
+        String privateKey = environment.getRequiredProperty("FIREBASE_PRIVATE_KEY").replace("\\n", "\n");
+
+        FirebaseCredential firebaseCredential = new FirebaseCredential();
+        firebaseCredential.setType(environment.getRequiredProperty("FIREBASE_TYPE"));
+        firebaseCredential.setProject_id(projectId);
+        firebaseCredential.setPrivate_key_id("FIREBASE_PRIVATE_KEY_ID");
+        firebaseCredential.setPrivate_key(privateKey);
+        firebaseCredential.setClient_email(environment.getRequiredProperty("FIREBASE_CLIENT_EMAIL"));
+        firebaseCredential.setClient_id(environment.getRequiredProperty("FIREBASE_CLIENT_ID"));
+        firebaseCredential.setAuth_uri(environment.getRequiredProperty("FIREBASE_AUTH_URI"));
+        firebaseCredential.setToken_uri(environment.getRequiredProperty("FIREBASE_TOKEN_URI"));
+        firebaseCredential.setAuth_provider_x509_cert_url(environment.getRequiredProperty("FIREBASE_AUTH_PROVIDER_X509_CERT_URL"));
+        firebaseCredential.setClient_x509_cert_url(environment.getRequiredProperty("FIREBASE_CLIENT_X509_CERT_URL"));
+        firebaseCredential.setUniverse_domain(environment.getRequiredProperty("FIREBASE_UNIVERSE_DOMAIN"));
+        //serialize with Jackson
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = mapper.writeValueAsString(firebaseCredential);
+
+        //convert jsonString string to InputStream using Apache Commons
+        return IOUtils.toInputStream(jsonString);
+    }
+
 
 
     /**
@@ -45,12 +79,13 @@ public class FirebaseStorageStrategyService{
         projectId = "socialhub-30934";
         
         // Se crea un FileInputStream para leer el archivo de credenciales de servicio (serviceAccount.json)
-        FileInputStream serviceAccount = new FileInputStream("./serviceAccount.json");
-        
+//        FileInputStream serviceAccount = new FileInputStream("./serviceAccount.json");
+        InputStream firebaseCredential = createFirebaseCredential();
+
         // Se construye la configuración de StorageOptions utilizando el ID del proyecto y las credenciales del servicio
         this.storageOptions = StorageOptions.newBuilder()
                 .setProjectId(projectId)
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
+                .setCredentials(GoogleCredentials.fromStream(firebaseCredential)).build();
     }
 
     
