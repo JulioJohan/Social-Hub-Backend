@@ -1,7 +1,6 @@
 package com.socialhub.service;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +14,6 @@ import javax.annotation.PostConstruct;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialhub.model.dto.FirebaseCredential;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,8 +34,11 @@ public class FirebaseStorageStrategyService{
     private String bucketName;
     private String projectId;
 
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
+
+    public FirebaseStorageStrategyService(Environment environment) {
+        this.environment = environment;
+    }
 
 
     private InputStream createFirebaseCredential() throws Exception {
