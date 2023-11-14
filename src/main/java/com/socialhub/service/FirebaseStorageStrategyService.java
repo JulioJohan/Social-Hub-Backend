@@ -57,7 +57,10 @@ public class FirebaseStorageStrategyService{
         firebaseCredential.setAuth_provider_x509_cert_url(environment.getRequiredProperty("FIREBASE_AUTH_PROVIDER_X509_CERT_URL"));
         firebaseCredential.setClient_x509_cert_url(environment.getRequiredProperty("FIREBASE_CLIENT_X509_CERT_URL"));
         firebaseCredential.setUniverse_domain(environment.getRequiredProperty("FIREBASE_UNIVERSE_DOMAIN"));
-        log.info("firebaseCredential {}",firebaseCredential);
+        log.info("firebaseCredential {}",firebaseCredential.getProject_id());
+        log.info("firebaseCredential {}",firebaseCredential.getUniverse_domain());
+        log.info("firebaseCredential {}",firebaseCredential.getType());
+
         //serialize with Jackson
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(firebaseCredential);
