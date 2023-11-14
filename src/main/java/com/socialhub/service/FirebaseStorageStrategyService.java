@@ -43,7 +43,7 @@ public class FirebaseStorageStrategyService{
 
     private InputStream createFirebaseCredential() throws Exception {
         //private key
-        String privateKey = environment.getRequiredProperty("FIREBASE_PRIVATE_KEY").replace("\\n", "\n");
+        String privateKey = environment.getRequiredProperty("FIREBASE_PRIVATE_KEY");
 
         FirebaseCredential firebaseCredential = new FirebaseCredential();
         firebaseCredential.setType(environment.getRequiredProperty("FIREBASE_TYPE"));
@@ -57,6 +57,7 @@ public class FirebaseStorageStrategyService{
         firebaseCredential.setAuth_provider_x509_cert_url(environment.getRequiredProperty("FIREBASE_AUTH_PROVIDER_X509_CERT_URL"));
         firebaseCredential.setClient_x509_cert_url(environment.getRequiredProperty("FIREBASE_CLIENT_X509_CERT_URL"));
         firebaseCredential.setUniverse_domain(environment.getRequiredProperty("FIREBASE_UNIVERSE_DOMAIN"));
+        log.info("firebaseCredential {}",firebaseCredential);
         //serialize with Jackson
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(firebaseCredential);
