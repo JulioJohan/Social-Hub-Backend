@@ -40,12 +40,11 @@ public class FirebaseStorageStrategyService{
     private String bucketName;
     private String projectId;
 
-    private Environment environment;
+    private final Environment environment;
 
-    public void FirebaseStorageStrategyce(Environment environment) {
+    public FirebaseStorageStrategyService(Environment environment) {
         this.environment = environment;
     }
-
 
     private InputStream createFirebaseCredential() throws Exception {
         //private key
