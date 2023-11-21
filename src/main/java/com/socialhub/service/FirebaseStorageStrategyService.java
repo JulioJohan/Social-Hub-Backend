@@ -54,7 +54,7 @@ public class FirebaseStorageStrategyService{
         FirebaseCredential firebaseCredential = new FirebaseCredential();
         firebaseCredential.setType(environment.getRequiredProperty("FIREBASE_TYPE"));
         firebaseCredential.setProject_id(projectId);
-        firebaseCredential.setPrivate_key_id("FIREBASE_PRIVATE_KEY_ID");
+        firebaseCredential.setPrivate_key_id(environment.getRequiredProperty( "FIREBASE_PRIVATE_KEY_ID"));
         firebaseCredential.setPrivate_key(privateKey);
         firebaseCredential.setClient_email(environment.getRequiredProperty("FIREBASE_CLIENT_EMAIL"));
         firebaseCredential.setClient_id(environment.getRequiredProperty("FIREBASE_CLIENT_ID"));
@@ -86,21 +86,16 @@ public class FirebaseStorageStrategyService{
      */
     @PostConstruct
     private void initializeFirebase() throws Exception {
-        //bucketName = environment.getRequiredProperty("FIREBASE_BUCKET_NAME");
-        //projectId = environment.getRequiredProperty("FIREBASE_PROJECT_ID");
+        bucketName = environment.getRequiredProperty("FIREBASE_BUCKET_NAME");
+        projectId = environment.getRequiredProperty("FIREBASE_PROJECT_ID");
 //        bucketName = "socialhub-30934.appspot.com";
 //        projectId = "socialhub-30934";
-        
+         InputStream firebaseCredential =  createFirebaseCredential();
         // Se crea un FileInputStream para leer el archivo de credenciales de servicio (serviceAccount.json)
-        FileInputStream serviceAccount = new FileInputStream("./serviceAccount.json");
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
-        FirebaseApp.initializeApp(options);
-
         // Se construye la configuración de StorageOptions utilizando el ID del proyecto y las credenciales del servicio
         this.storageOptions = StorageOptions.newBuilder()
                 .setProjectId(projectId)
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
+                .setCredentials(GoogleCredentials.fromStream(firebaseCredential)).build();
     }
 
     
