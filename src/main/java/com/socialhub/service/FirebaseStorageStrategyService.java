@@ -89,6 +89,7 @@ public class FirebaseStorageStrategyService{
         projectId = environment.getRequiredProperty("FIREBASE_PROJECT_ID");
 //        bucketName = "socialhub-30934.appspot.com";
 //        projectId = "socialhub-30934";
+
          InputStream firebaseCredential =  createFirebaseCredential();
         // Se crea un FileInputStream para leer el archivo de credenciales de servicio (serviceAccount.json)
         // Se construye la configuración de StorageOptions utilizando el ID del proyecto y las credenciales del servicio
