@@ -1,14 +1,17 @@
 package com.socialhub.service;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -37,12 +40,12 @@ public class FirebaseStorageStrategyService{
     private String bucketName;
     private String projectId;
 
-    private final Environment environment;
+    private Environment environment;
 
-    public FirebaseStorageStrategyce(Environment environment) {
+    public void FirebaseStorageStrategyce(Environment environment) {
         this.environment = environment;
     }
-    Servi
+
 
     private InputStream createFirebaseCredential() throws Exception {
         //private key
@@ -83,8 +86,8 @@ public class FirebaseStorageStrategyService{
      */
     @PostConstruct
     private void initializeFirebase() throws Exception {
-        bucketName = environment.getRequiredProperty("FIREBASE_BUCKET_NAME");
-        projectId = environment.getRequiredProperty("FIREBASE_PROJECT_ID");
+        //bucketName = environment.getRequiredProperty("FIREBASE_BUCKET_NAME");
+        //projectId = environment.getRequiredProperty("FIREBASE_PROJECT_ID");
 //        bucketName = "socialhub-30934.appspot.com";
 //        projectId = "socialhub-30934";
         
@@ -93,7 +96,6 @@ public class FirebaseStorageStrategyService{
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
         FirebaseApp.initializeApp(options);
-        //        InputStream firebaseCredential = createFirebaseCredential();
 
         // Se construye la configuración de StorageOptions utilizando el ID del proyecto y las credenciales del servicio
         this.storageOptions = StorageOptions.newBuilder()
