@@ -1,6 +1,7 @@
 package com.socialhub.service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +13,8 @@ import java.util.Objects;
 import javax.annotation.PostConstruct;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.socialhub.model.dto.FirebaseCredential;
 import org.apache.commons.io.IOUtils;
 import org.springframework.core.env.Environment;
@@ -36,10 +39,10 @@ public class FirebaseStorageStrategyService{
 
     private final Environment environment;
 
-    public FirebaseStorageStrategyService(Environment environment) {
+    public FirebaseStorageStrategyce(Environment environment) {
         this.environment = environment;
     }
-
+    Servi
 
     private InputStream createFirebaseCredential() throws Exception {
         //private key
@@ -86,13 +89,16 @@ public class FirebaseStorageStrategyService{
 //        projectId = "socialhub-30934";
         
         // Se crea un FileInputStream para leer el archivo de credenciales de servicio (serviceAccount.json)
-//        FileInputStream serviceAccount = new FileInputStream("./serviceAccount.json");
-        InputStream firebaseCredential = createFirebaseCredential();
+        FileInputStream serviceAccount = new FileInputStream("./serviceAccount.json");
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
+        FirebaseApp.initializeApp(options);
+        //        InputStream firebaseCredential = createFirebaseCredential();
 
         // Se construye la configuración de StorageOptions utilizando el ID del proyecto y las credenciales del servicio
         this.storageOptions = StorageOptions.newBuilder()
                 .setProjectId(projectId)
-                .setCredentials(GoogleCredentials.fromStream(firebaseCredential)).build();
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
     }
 
     
