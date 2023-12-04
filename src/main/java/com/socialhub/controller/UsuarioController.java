@@ -54,6 +54,8 @@ public class UsuarioController {
        // Invoca al servicio para crear el post utilizando los datos proporcionados
 
        Response<User> response = usuarioService.createUser(user);
+       
+       
 
        // Retorna una respuesta con el post creado y el estado HTTP OK (200)
        return new ResponseEntity<>(response, HttpStatus.OK);
