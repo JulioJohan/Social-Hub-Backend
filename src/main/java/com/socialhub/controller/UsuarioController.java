@@ -23,6 +23,7 @@ import com.socialhub.service.IUsuarioService;
 @RequestMapping("/user")
 public class UsuarioController {
 
+	
 	@Autowired
 	private IUsuarioService usuarioService;
 	
@@ -57,6 +58,8 @@ public class UsuarioController {
        
        
 
+       
+       
        // Retorna una respuesta con el post creado y el estado HTTP OK (200)
        return new ResponseEntity<>(response, HttpStatus.OK);
    }
